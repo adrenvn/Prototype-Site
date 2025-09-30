@@ -3,282 +3,164 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Экспертное фитнес‑образование — демо (HTML → Tilda)</title>
+<title>Экспертное фитнес‑образование — демо Apple‑style</title>
 <style>
   :root{
-    --bg:#0b0c0f; --ink:#101317; --card:#ffffff; --muted:#6b7280; --text:#0f172a;
-    --brand:#10b981; --brand-ink:#064e3b; --line:#e5e7eb; --cta:#0ea5e9; --cta-ink:#0c4a6e;
+    --bg1:#0a0f1f; --bg2:#111c2f; /* фоновые градиенты */
+    --glass-bg:rgba(255,255,255,0.08);
+    --glass-border:rgba(255,255,255,0.18);
+    --brand:#3b82f6; --brand2:#06b6d4; /* акценты */
+    --text:#f1f5f9; --muted:#94a3b8;
+    --radius:18px;
   }
   *{box-sizing:border-box}
-  html,body{margin:0; padding:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; background:#fafafa; color:var(--text)}
-  a{color:inherit}
-  img{max-width:100%; display:block}
-  .container{width:min(1120px,100%); margin-inline:auto; padding: clamp(16px, 3vw, 28px)}
-  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:10px; padding:14px 18px; font-weight:600; cursor:pointer; text-decoration:none}
-  .btn-primary{background:var(--cta); color:#fff}
-  .btn-outline{background:#fff; color:var(--cta-ink); border:1px solid var(--line)}
-  .btn-whatsapp{background:#25D366; color:#063}
-  header.nav{position:sticky; top:0; z-index:40; backdrop-filter:saturate(120%) blur(6px); background:rgba(255,255,255,.85); border-bottom:1px solid var(--line)}
-  .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px}
-  .brand{font-weight:800; letter-spacing:.2px}
-  .menu{display:flex; gap:14px; align-items:center}
-  .menu a{padding:10px 8px; text-decoration:none; color:#111827}
-  .burger{display:none}
+  body{margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
+       background:linear-gradient(135deg,var(--bg1),var(--bg2)); color:var(--text);
+       -webkit-font-smoothing:antialiased}
+  a{color:inherit; text-decoration:none}
+  h1,h2,h3,h4{margin:0 0 12px; font-weight:700;}
+  h1{font-size:clamp(26px,6vw,44px)}
+  h2{font-size:clamp(22px,5vw,34px)}
+  p{margin:0 0 14px; line-height:1.5}
+  .container{width:min(1080px,100%); margin:auto; padding:clamp(20px,4vw,40px)}
 
-  .hero{background:linear-gradient(180deg,#ffffff, #f3f7f5); border-bottom:1px solid var(--line)}
-  .hero h1{font-size:clamp(22px, 5vw, 40px); line-height:1.15; margin:0 0 8px}
-  .hero p{font-size:clamp(15px, 2.8vw, 20px); color:#334155; margin:0 0 18px}
-  .hero-cta{display:grid; grid-template-columns:1fr; gap:10px; max-width:520px}
+  /* Glass cards */
+  .glass{background:var(--glass-bg); border:1px solid var(--glass-border);
+         backdrop-filter:blur(12px) saturate(160%);
+         -webkit-backdrop-filter:blur(12px) saturate(160%);
+         border-radius:var(--radius); padding:20px;}
 
-  .section{padding: clamp(28px, 6vw, 64px) 0}
-  .section h2{font-size:clamp(20px, 4.2vw, 30px); margin:0 0 16px}
-  .muted{color:#64748b}
+  /* Buttons */
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:14px 22px;
+       border-radius:var(--radius); font-weight:600; font-size:16px; cursor:pointer;
+       border:none; text-decoration:none; transition:.25s;}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff;}
+  .btn-primary:hover{opacity:.9}
+  .btn-glass{background:var(--glass-bg); color:var(--text); border:1px solid var(--glass-border)}
 
-  .grid-4{display:grid; gap:12px; grid-template-columns:1fr}
-  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px}
-  .card h3{margin:0 0 8px; font-size:18px}
-  .card p{margin:0; color:#334155; font-size:15px}
+  /* Hero */
+  header.hero{min-height:90vh; display:flex; align-items:center; justify-content:center;
+              text-align:center; position:relative; overflow:hidden;}
+  header.hero::before{content:""; position:absolute; inset:-50%; background:radial-gradient(circle at 50% 30%,rgba(59,130,246,.4),transparent 60%), radial-gradient(circle at 80% 70%,rgba(6,182,212,.35),transparent 60%);
+                      filter:blur(100px);}
+  header.hero .inner{position:relative; z-index:10;}
 
-  .team{display:grid; gap:12px; grid-template-columns:1fr}
-  .teacher{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px}
-  .video{position:relative; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; margin-bottom:10px}
-  .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
-  .teacher h4{margin:6px 0 4px}
-  .teacher small{color:#64748b}
+  /* Sections */
+  section{padding:clamp(40px,8vw,80px) 0;}
+  .grid-4{display:grid; gap:20px;}
+  .grid-4 .glass h3{font-size:18px; margin-bottom:8px}
 
-  .logos{display:grid; gap:10px; grid-template-columns:repeat(2, minmax(0,1fr))}
-  .logo{background:#fff; border:1px solid var(--line); border-radius:12px; min-height:64px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-weight:700}
-
-  .contacts{display:grid; gap:12px}
-  .contact-item{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px}
-
-  footer{padding:24px 0; border-top:1px solid var(--line); color:#64748b}
-
-  /* Modal */
-  .modal-backdrop{position:fixed; inset:0; background:rgba(15,23,42,.5); display:none; align-items:center; justify-content:center; padding:16px; z-index:50}
-  .modal{width:min(560px,100%); background:#fff; border-radius:14px; border:1px solid var(--line); padding:18px}
-  .modal h3{margin:0 0 12px}
-  .row{display:grid; gap:10px}
-  label{font-size:14px; color:#334155}
-  input[type="text"], input[type="tel"], select{width:100%; border:1px solid var(--line); border-radius:10px; padding:12px; font-size:16px}
-  .modal-actions{display:flex; gap:10px; margin-top:10px}
-
-  /* Breakpoints */
-  @media (min-width:720px){
-    .grid-4{grid-template-columns:repeat(2, minmax(0,1fr))}
-    .team{grid-template-columns:repeat(2, minmax(0,1fr))}
+  @media(min-width:720px){
+    .grid-4{grid-template-columns:repeat(2,1fr)}
   }
-  @media (min-width:1024px){
-    .menu{gap:18px}
-    .grid-4{grid-template-columns:repeat(4, minmax(0,1fr))}
-    .team{grid-template-columns:repeat(4, minmax(0,1fr))}
-    .logos{grid-template-columns:repeat(6, minmax(0,1fr))}
+  @media(min-width:1024px){
+    .grid-4{grid-template-columns:repeat(4,1fr)}
   }
-  /* Mobile nav */
-  @media (max-width:880px){
-    .menu{display:none}
-    .burger{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff}
-  }
+
+  /* Teachers */
+  .teachers{display:grid; gap:20px}
+  @media(min-width:900px){.teachers{grid-template-columns:repeat(2,1fr)}}
+  .teacher .video{position:relative; aspect-ratio:16/9; border-radius:var(--radius);
+                  overflow:hidden; margin-bottom:10px;}
+  .teacher .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+
+  /* Logos */
+  .logos{display:grid; gap:14px; grid-template-columns:repeat(2,1fr)}
+  @media(min-width:1024px){.logos{grid-template-columns:repeat(6,1fr)}}
+  .logo{background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:var(--radius);
+        min-height:70px; display:flex; align-items:center; justify-content:center; color:var(--muted)}
+
+  /* Contacts */
+  .contacts{display:grid; gap:16px}
+  .contact-item{padding:14px; border-radius:var(--radius); background:var(--glass-bg); border:1px solid var(--glass-border)}
+
+  footer{padding:20px 0; text-align:center; font-size:14px; color:var(--muted)}
+
+  /* Simple animations */
+  [data-animate]{opacity:0; transform:translateY(20px); transition:.8s cubic-bezier(.4,0,.2,1)}
+  [data-animate].show{opacity:1; transform:none}
 </style>
 </head>
 <body>
-<header class="nav">
-  <div class="container nav-inner">
-    <div class="brand">Экспертное фитнес‑образование</div>
-    <nav class="menu" aria-label="Главное меню">
-      <a href="#program">Программа</a>
-      <a href="#team">Преподаватели</a>
-      <a href="#reviews">Отзывы</a>
-      <a href="#docs">Документы</a>
-      <a href="#contacts">Контакты</a>
-      <a class="btn btn-whatsapp" href="https://wa.me/79990000000" target="_blank" rel="noopener">WhatsApp</a>
-    </nav>
-    <button class="burger" id="burger" aria-label="Меню">Меню ▾</button>
-  </div>
-  <div class="container" id="mobileMenu" style="display:none;">
-    <div class="contacts">
-      <a href="#program">Программа</a>
-      <a href="#team">Преподаватели</a>
-      <a href="#reviews">Отзывы</a>
-      <a href="#docs">Документы</a>
-      <a href="#contacts">Контакты</a>
-      <a class="btn btn-whatsapp" style="width:100%" href="https://wa.me/79990000000" target="_blank" rel="noopener">WhatsApp</a>
+<header class="hero">
+  <div class="inner container">
+    <h1>Экспертное фитнес‑образование в Барнауле</h1>
+    <p>Научись управлять телом на уровне клетки — диплом гос. образца</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://wa.me/79990000000" class="btn btn-primary">Написать в WhatsApp</a>
+      <a href="#form" class="btn btn-glass">Скачать программу</a>
     </div>
   </div>
 </header>
 
-<section class="hero section">
+<section id="program">
   <div class="container">
-    <h1>Экспертное фитнес‑образование в Барнауле — диплом гос. образца</h1>
-    <p>Научись управлять телом на уровне клетки</p>
-    <div class="hero-cta">
-      <a class="btn btn-whatsapp" href="https://wa.me/79990000000" target="_blank" rel="noopener">Написать в WhatsApp</a>
-      <button class="btn btn-primary" id="openModal">Скачать программу</button>
-    </div>
-  </div>
-</section>
-
-<section id="program" class="section">
-  <div class="container">
-    <h2>Что внутри программы</h2>
-    <p class="muted">Черновые формулировки — для демо, будут обновлены.</p>
+    <h2 data-animate>Что внутри программы</h2>
     <div class="grid-4">
-      <article class="card"><h3>Эндокринология</h3><p>Работа с лишним весом с медицинским подходом. Связь ЖКТ и общего состояния.</p></article>
-      <article class="card"><h3>Нутрициология</h3><p>Когда ЗОЖ начинает вредить, и как получить быстрый результат без изнурительных диет.</p></article>
-      <article class="card"><h3>Гипертрофия</h3><p>Почему «правильная» нагрузка не даёт мышечного роста — что мешает прогрессу.</p></article>
-      <article class="card"><h3>Биохимия</h3><p>Как устроен организм на уровне клетки и что это значит для практики.</p></article>
+      <div class="glass" data-animate><h3>Эндокринология</h3><p>Работа с лишним весом с медицинским подходом.</p></div>
+      <div class="glass" data-animate><h3>Нутрициология</h3><p>Как получить быстрый результат без изнурительных диет.</p></div>
+      <div class="glass" data-animate><h3>Гипертрофия</h3><p>Почему рост мышц останавливается и что с этим делать.</p></div>
+      <div class="glass" data-animate><h3>Биохимия</h3><p>Как работает организм на клеточном уровне.</p></div>
     </div>
   </div>
 </section>
 
-<section id="team" class="section" aria-labelledby="team-h2">
+<section id="teachers">
   <div class="container">
-    <h2 id="team-h2">Преподаватели</h2>
-    <p class="muted">Короткая видеосамопрезентация каждого</p>
-    <div class="team">
-      <!-- Вставь свои ID YouTube/Vimeo; сейчас — плейсхолдеры -->
-      <div class="teacher">
-        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
-        <h4>Имя Фамилия</h4>
-        <small>Экспертиза / должность</small>
-        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+    <h2 data-animate>Преподаватели</h2>
+    <div class="teachers">
+      <div class="teacher glass" data-animate>
+        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
+        <h3>Имя Фамилия</h3>
+        <p>Краткое резюме — 2–3 абзаца.</p>
       </div>
-      <div class="teacher">
-        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
-        <h4>Имя Фамилия</h4>
-        <small>Экспертиза / должность</small>
-        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
-      </div>
-      <div class="teacher">
-        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
-        <h4>Имя Фамилия</h4>
-        <small>Экспертиза / должность</small>
-        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
-      </div>
-      <div class="teacher">
-        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
-        <h4>Имя Фамилия</h4>
-        <small>Экспертиза / должность</small>
-        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+      <div class="teacher glass" data-animate>
+        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
+        <h3>Имя Фамилия</h3>
+        <p>Краткое резюме.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="reviews" class="section">
+<section id="reviews">
   <div class="container">
-    <h2>Отзывы и результаты</h2>
-    <div class="team" style="margin-bottom:14px">
-      <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Отзыв" allowfullscreen loading="lazy"></iframe></div>
-      <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Отзыв" allowfullscreen loading="lazy"></iframe></div>
+    <h2 data-animate>Отзывы и результаты</h2>
+    <div class="teachers">
+      <div class="video glass" data-animate><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
+      <div class="video glass" data-animate><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
     </div>
-    <p class="muted" style="margin:8px 0 12px">Где работают наши выпускники</p>
-    <div class="logos">
-      <div class="logo">Лого</div>
-      <div class="logo">Лого</div>
-      <div class="logo">Лого</div>
-      <div class="logo">Лого</div>
-      <div class="logo">Лого</div>
-      <div class="logo">Лого</div>
+    <div class="logos" style="margin-top:30px">
+      <div class="logo" data-animate>Лого</div>
+      <div class="logo" data-animate>Лого</div>
+      <div class="logo" data-animate>Лого</div>
+      <div class="logo" data-animate>Лого</div>
     </div>
   </div>
 </section>
 
-<section id="docs" class="section" aria-labelledby="docs-h2">
+<section id="contacts">
   <div class="container">
-    <h2 id="docs-h2">Документы</h2>
-    <p class="muted">Сканы лицензий, аккредитаций и образцов диплома будут на отдельной странице.</p>
-    <a class="btn btn-outline" href="#" aria-disabled="true">Перейти на страницу документов</a>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>Готовы получить программу обучения?</h2>
-    <div class="hero-cta">
-      <a class="btn btn-whatsapp" href="https://wa.me/79990000000" target="_blank" rel="noopener">WhatsApp</a>
-      <button class="btn btn-primary" id="openModal2">Скачать программу</button>
-      <small class="muted">Отправим в выбранный мессенджер</small>
+    <h2 data-animate>Контакты</h2>
+    <div class="contacts">
+      <div class="contact-item" data-animate><strong>Телефон:</strong> +7 999 000‑00‑00</div>
+      <div class="contact-item" data-animate><strong>WhatsApp:</strong> ссылка</div>
+      <div class="contact-item" data-animate><strong>Telegram:</strong> ссылка</div>
+      <div class="contact-item" data-animate><strong>Email:</strong> info@example.com</div>
     </div>
-  </div>
-</section>
-
-<section id="contacts" class="section" aria-labelledby="contacts-h2">
-  <div class="container contacts">
-    <h2 id="contacts-h2">Контакты</h2>
-    <div class="contact-item"><strong>Телефон:</strong> <a href="tel:+79990000000">+7 999 000‑00‑00</a></div>
-    <div class="contact-item"><strong>WhatsApp:</strong> <a href="https://wa.me/79990000000" target="_blank" rel="noopener">написать</a></div>
-    <div class="contact-item"><strong>Telegram:</strong> <a href="https://t.me/username" target="_blank" rel="noopener">@username</a></div>
-    <div class="contact-item"><strong>Email:</strong> <a href="mailto:info@example.com">info@example.com</a></div>
-    <div class="contact-item"><strong>Адрес:</strong> Барнаул, ул. Примерная, 1</div>
-    <div class="contact-item"><strong>Карта:</strong> (вставить iframe Яндекс/Google Maps)</div>
   </div>
 </section>
 
 <footer>
-  <div class="container">
-    <small>© 2025 Экспертное фитнес‑образование. Все права защищены. · <a href="#">Политика конфиденциальности</a> · <a href="#">Пользовательское соглашение</a></small>
-  </div>
+  <div class="container">© 2025 Экспертное фитнес‑образование</div>
 </footer>
 
-<!-- Modal: Скачать программу -->
-<div class="modal-backdrop" id="modal">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-h3">
-    <h3 id="modal-h3">Получить программу</h3>
-    <form id="leadForm">
-      <div class="row">
-        <label>ФИО<input type="text" name="name" required placeholder="Иванов Иван"/></label>
-        <label>Телефон<input type="tel" name="phone" required placeholder="+7 999 000‑00‑00"/></label>
-        <label>Куда отправить программу
-          <select name="messenger" required>
-            <option value="wa">WhatsApp</option>
-            <option value="tg">Telegram</option>
-          </select>
-        </label>
-      </div>
-      <div class="modal-actions">
-        <button type="submit" class="btn btn-primary">Отправить</button>
-        <button type="button" class="btn btn-outline" id="closeModal">Отмена</button>
-      </div>
-      <small class="muted">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</small>
-    </form>
-  </div>
-</div>
-
 <script>
-  const burger = document.getElementById('burger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  burger?.addEventListener('click', () => {
-    mobileMenu.style.display = mobileMenu.style.display === 'none' || mobileMenu.style.display === '' ? 'block' : 'none';
-  });
-
-  const modal = document.getElementById('modal');
-  const openModal = document.getElementById('openModal');
-  const openModal2 = document.getElementById('openModal2');
-  const closeModal = document.getElementById('closeModal');
-  [openModal, openModal2].forEach(btn => btn?.addEventListener('click', () => {
-    modal.style.display = 'flex';
-  }));
-  closeModal?.addEventListener('click', () => modal.style.display = 'none');
-  modal?.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
-
-  document.getElementById('leadForm')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Спасибо! Отправим программу в выбранный мессенджер.');
-    modal.style.display = 'none';
-  });
-
-  // Smooth scroll for same-page anchors
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href');
-      if(id.length > 1){
-        e.preventDefault();
-        document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
-        mobileMenu.style.display = 'none';
-      }
-    });
-  });
+  const els = document.querySelectorAll('[data-animate]');
+  const obs = new IntersectionObserver(entries =>{
+    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('show')})
+  },{threshold:.1});
+  els.forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
