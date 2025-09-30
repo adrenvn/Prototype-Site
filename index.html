@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Экспертное фитнес‑образование — демо (HTML → Tilda)</title>
+<style>
+  :root{
+    --bg:#0b0c0f; --ink:#101317; --card:#ffffff; --muted:#6b7280; --text:#0f172a;
+    --brand:#10b981; --brand-ink:#064e3b; --line:#e5e7eb; --cta:#0ea5e9; --cta-ink:#0c4a6e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; padding:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; background:#fafafa; color:var(--text)}
+  a{color:inherit}
+  img{max-width:100%; display:block}
+  .container{width:min(1120px,100%); margin-inline:auto; padding: clamp(16px, 3vw, 28px)}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:10px; padding:14px 18px; font-weight:600; cursor:pointer; text-decoration:none}
+  .btn-primary{background:var(--cta); color:#fff}
+  .btn-outline{background:#fff; color:var(--cta-ink); border:1px solid var(--line)}
+  .btn-whatsapp{background:#25D366; color:#063}
+  header.nav{position:sticky; top:0; z-index:40; backdrop-filter:saturate(120%) blur(6px); background:rgba(255,255,255,.85); border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .brand{font-weight:800; letter-spacing:.2px}
+  .menu{display:flex; gap:14px; align-items:center}
+  .menu a{padding:10px 8px; text-decoration:none; color:#111827}
+  .burger{display:none}
+
+  .hero{background:linear-gradient(180deg,#ffffff, #f3f7f5); border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(22px, 5vw, 40px); line-height:1.15; margin:0 0 8px}
+  .hero p{font-size:clamp(15px, 2.8vw, 20px); color:#334155; margin:0 0 18px}
+  .hero-cta{display:grid; grid-template-columns:1fr; gap:10px; max-width:520px}
+
+  .section{padding: clamp(28px, 6vw, 64px) 0}
+  .section h2{font-size:clamp(20px, 4.2vw, 30px); margin:0 0 16px}
+  .muted{color:#64748b}
+
+  .grid-4{display:grid; gap:12px; grid-template-columns:1fr}
+  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px}
+  .card h3{margin:0 0 8px; font-size:18px}
+  .card p{margin:0; color:#334155; font-size:15px}
+
+  .team{display:grid; gap:12px; grid-template-columns:1fr}
+  .teacher{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px}
+  .video{position:relative; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; margin-bottom:10px}
+  .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+  .teacher h4{margin:6px 0 4px}
+  .teacher small{color:#64748b}
+
+  .logos{display:grid; gap:10px; grid-template-columns:repeat(2, minmax(0,1fr))}
+  .logo{background:#fff; border:1px solid var(--line); border-radius:12px; min-height:64px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-weight:700}
+
+  .contacts{display:grid; gap:12px}
+  .contact-item{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px}
+
+  footer{padding:24px 0; border-top:1px solid var(--line); color:#64748b}
+
+  /* Modal */
+  .modal-backdrop{position:fixed; inset:0; background:rgba(15,23,42,.5); display:none; align-items:center; justify-content:center; padding:16px; z-index:50}
+  .modal{width:min(560px,100%); background:#fff; border-radius:14px; border:1px solid var(--line); padding:18px}
+  .modal h3{margin:0 0 12px}
+  .row{display:grid; gap:10px}
+  label{font-size:14px; color:#334155}
+  input[type="text"], input[type="tel"], select{width:100%; border:1px solid var(--line); border-radius:10px; padding:12px; font-size:16px}
+  .modal-actions{display:flex; gap:10px; margin-top:10px}
+
+  /* Breakpoints */
+  @media (min-width:720px){
+    .grid-4{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .team{grid-template-columns:repeat(2, minmax(0,1fr))}
+  }
+  @media (min-width:1024px){
+    .menu{gap:18px}
+    .grid-4{grid-template-columns:repeat(4, minmax(0,1fr))}
+    .team{grid-template-columns:repeat(4, minmax(0,1fr))}
+    .logos{grid-template-columns:repeat(6, minmax(0,1fr))}
+  }
+  /* Mobile nav */
+  @media (max-width:880px){
+    .menu{display:none}
+    .burger{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff}
+  }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <div class="brand">Экспертное фитнес‑образование</div>
+    <nav class="menu" aria-label="Главное меню">
+      <a href="#program">Программа</a>
+      <a href="#team">Преподаватели</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#docs">Документы</a>
+      <a href="#contacts">Контакты</a>
+      <a class="btn btn-whatsapp" href="https://wa.me/79990000000" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Меню">Меню ▾</button>
+  </div>
+  <div class="container" id="mobileMenu" style="display:none;">
+    <div class="contacts">
+      <a href="#program">Программа</a>
+      <a href="#team">Преподаватели</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#docs">Документы</a>
+      <a href="#contacts">Контакты</a>
+      <a class="btn btn-whatsapp" style="width:100%" href="https://wa.me/79990000000" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero section">
+  <div class="container">
+    <h1>Экспертное фитнес‑образование в Барнауле — диплом гос. образца</h1>
+    <p>Научись управлять телом на уровне клетки</p>
+    <div class="hero-cta">
+      <a class="btn btn-whatsapp" href="https://wa.me/79990000000" target="_blank" rel="noopener">Написать в WhatsApp</a>
+      <button class="btn btn-primary" id="openModal">Скачать программу</button>
+    </div>
+  </div>
+</section>
+
+<section id="program" class="section">
+  <div class="container">
+    <h2>Что внутри программы</h2>
+    <p class="muted">Черновые формулировки — для демо, будут обновлены.</p>
+    <div class="grid-4">
+      <article class="card"><h3>Эндокринология</h3><p>Работа с лишним весом с медицинским подходом. Связь ЖКТ и общего состояния.</p></article>
+      <article class="card"><h3>Нутрициология</h3><p>Когда ЗОЖ начинает вредить, и как получить быстрый результат без изнурительных диет.</p></article>
+      <article class="card"><h3>Гипертрофия</h3><p>Почему «правильная» нагрузка не даёт мышечного роста — что мешает прогрессу.</p></article>
+      <article class="card"><h3>Биохимия</h3><p>Как устроен организм на уровне клетки и что это значит для практики.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="section" aria-labelledby="team-h2">
+  <div class="container">
+    <h2 id="team-h2">Преподаватели</h2>
+    <p class="muted">Короткая видеосамопрезентация каждого</p>
+    <div class="team">
+      <!-- Вставь свои ID YouTube/Vimeo; сейчас — плейсхолдеры -->
+      <div class="teacher">
+        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
+        <h4>Имя Фамилия</h4>
+        <small>Экспертиза / должность</small>
+        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+      </div>
+      <div class="teacher">
+        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
+        <h4>Имя Фамилия</h4>
+        <small>Экспертиза / должность</small>
+        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+      </div>
+      <div class="teacher">
+        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
+        <h4>Имя Фамилия</h4>
+        <small>Экспертиза / должность</small>
+        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+      </div>
+      <div class="teacher">
+        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Видео преподавателя" allowfullscreen loading="lazy"></iframe></div>
+        <h4>Имя Фамилия</h4>
+        <small>Экспертиза / должность</small>
+        <p>Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="section">
+  <div class="container">
+    <h2>Отзывы и результаты</h2>
+    <div class="team" style="margin-bottom:14px">
+      <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Отзыв" allowfullscreen loading="lazy"></iframe></div>
+      <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" title="Отзыв" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+    <p class="muted" style="margin:8px 0 12px">Где работают наши выпускники</p>
+    <div class="logos">
+      <div class="logo">Лого</div>
+      <div class="logo">Лого</div>
+      <div class="logo">Лого</div>
+      <div class="logo">Лого</div>
+      <div class="logo">Лого</div>
+      <div class="logo">Лого</div>
+    </div>
+  </div>
+</section>
+
+<section id="docs" class="section" aria-labelledby="docs-h2">
+  <div class="container">
+    <h2 id="docs-h2">Документы</h2>
+    <p class="muted">Сканы лицензий, аккредитаций и образцов диплома будут на отдельной странице.</p>
+    <a class="btn btn-outline" href="#" aria-disabled="true">Перейти на страницу документов</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Готовы получить программу обучения?</h2>
+    <div class="hero-cta">
+      <a class="btn btn-whatsapp" href="https://wa.me/79990000000" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn btn-primary" id="openModal2">Скачать программу</button>
+      <small class="muted">Отправим в выбранный мессенджер</small>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="section" aria-labelledby="contacts-h2">
+  <div class="container contacts">
+    <h2 id="contacts-h2">Контакты</h2>
+    <div class="contact-item"><strong>Телефон:</strong> <a href="tel:+79990000000">+7 999 000‑00‑00</a></div>
+    <div class="contact-item"><strong>WhatsApp:</strong> <a href="https://wa.me/79990000000" target="_blank" rel="noopener">написать</a></div>
+    <div class="contact-item"><strong>Telegram:</strong> <a href="https://t.me/username" target="_blank" rel="noopener">@username</a></div>
+    <div class="contact-item"><strong>Email:</strong> <a href="mailto:info@example.com">info@example.com</a></div>
+    <div class="contact-item"><strong>Адрес:</strong> Барнаул, ул. Примерная, 1</div>
+    <div class="contact-item"><strong>Карта:</strong> (вставить iframe Яндекс/Google Maps)</div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <small>© 2025 Экспертное фитнес‑образование. Все права защищены. · <a href="#">Политика конфиденциальности</a> · <a href="#">Пользовательское соглашение</a></small>
+  </div>
+</footer>
+
+<!-- Modal: Скачать программу -->
+<div class="modal-backdrop" id="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-h3">
+    <h3 id="modal-h3">Получить программу</h3>
+    <form id="leadForm">
+      <div class="row">
+        <label>ФИО<input type="text" name="name" required placeholder="Иванов Иван"/></label>
+        <label>Телефон<input type="tel" name="phone" required placeholder="+7 999 000‑00‑00"/></label>
+        <label>Куда отправить программу
+          <select name="messenger" required>
+            <option value="wa">WhatsApp</option>
+            <option value="tg">Telegram</option>
+          </select>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="button" class="btn btn-outline" id="closeModal">Отмена</button>
+      </div>
+      <small class="muted">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</small>
+    </form>
+  </div>
+</div>
+
+<script>
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger?.addEventListener('click', () => {
+    mobileMenu.style.display = mobileMenu.style.display === 'none' || mobileMenu.style.display === '' ? 'block' : 'none';
+  });
+
+  const modal = document.getElementById('modal');
+  const openModal = document.getElementById('openModal');
+  const openModal2 = document.getElementById('openModal2');
+  const closeModal = document.getElementById('closeModal');
+  [openModal, openModal2].forEach(btn => btn?.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  }));
+  closeModal?.addEventListener('click', () => modal.style.display = 'none');
+  modal?.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
+
+  document.getElementById('leadForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Спасибо! Отправим программу в выбранный мессенджер.');
+    modal.style.display = 'none';
+  });
+
+  // Smooth scroll for same-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if(id.length > 1){
+        e.preventDefault();
+        document.querySelector(id)?.scrollIntoView({behavior:'smooth'});
+        mobileMenu.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>
