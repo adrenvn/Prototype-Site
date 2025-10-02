@@ -1,166 +1,250 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Экспертное фитнес‑образование — демо Apple‑style</title>
-<style>
-  :root{
-    --bg1:#0a0f1f; --bg2:#111c2f; /* фоновые градиенты */
-    --glass-bg:rgba(255,255,255,0.08);
-    --glass-border:rgba(255,255,255,0.18);
-    --brand:#3b82f6; --brand2:#06b6d4; /* акценты */
-    --text:#f1f5f9; --muted:#94a3b8;
-    --radius:18px;
-  }
-  *{box-sizing:border-box}
-  body{margin:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
-       background:linear-gradient(135deg,var(--bg1),var(--bg2)); color:var(--text);
-       -webkit-font-smoothing:antialiased}
-  a{color:inherit; text-decoration:none}
-  h1,h2,h3,h4{margin:0 0 12px; font-weight:700;}
-  h1{font-size:clamp(26px,6vw,44px)}
-  h2{font-size:clamp(22px,5vw,34px)}
-  p{margin:0 0 14px; line-height:1.5}
-  .container{width:min(1080px,100%); margin:auto; padding:clamp(20px,4vw,40px)}
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Экспертное фитнес‑образование — Фиолетовая тема • Полное демо</title>
+        <style>:root { /* === Цветовая схема (фиолет) === */ --bg1: #1a0f29; --bg2: #2a1b3f;  /* фон */ --brand: #7c3aed; --brand2: #a855f7;  /* кнопки/акценты */ --text: #f3e8ff; --muted: #c4b5fd;  /* тексты */ --line: rgba(255,255,255,.16); --radius: 18px; } * { box-sizing: border-box; } html, body { height: 100%; } body { margin: 0; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Arial,sans-serif; background: linear-gradient(135deg,var(--bg1),var(--bg2)); color: var(--text); -webkit-font-smoothing: antialiased; } a { color: inherit; text-decoration: none; } img { max-width: 100%; display: block; } h1, h2, h3, h4 { margin: 0 0 10px; font-weight: 800; } h1 { font-size: clamp(26px,6vw,44px); } h2 { font-size: clamp(22px,5vw,34px); } p { margin: 0 0 12px; line-height: 1.55; } .container { width: min(1120px,100%); margin: auto; padding: clamp(18px,4vw,36px); } /* ===== NAV ===== */.nav { position: sticky; top: 0; z-index: 60; backdrop-filter: saturate(160%) blur(10px); -webkit-backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); background: rgba(26,15,41,.55); } .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; } .brand { font-weight: 900; letter-spacing: .2px; } .menu { display: flex; align-items: center; gap: 14px; } .menu a { padding: 10px 8px; } .burger { display: none; } @media (max-width:880px){ .menu {  display: none; }  .burger {  display: inline-flex;  align-items: center;  gap: 8px;  padding: 10px 12px;  border: 1px solid var(--line);  border-radius: 12px;  background: rgba(255,255,255,.06);  color: var(--text); } } .mobile-panel { display: none; } /* ===== GLASS ===== */.glass { position: relative; overflow: hidden; isolation: isolate; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); box-shadow: 0 10px 30px rgba(10,0,23,.45), inset 0 1px 0 rgba(255,255,255,.14); } /* мягкий внутренний блик + фиолетовый depth‑градиент */.glass--fx { background: linear-gradient(180deg, rgba(167,139,250,.08), rgba(124,58,237,.06) 60%, rgba(255,255,255,.05)),
+      radial-gradient(90px 60px at 24% 10%, rgba(255,255,255,.18), rgba(255,255,255,0) 70%),
+      rgba(255,255,255,.06); } .section-card { padding: clamp(18px,3vw,30px); border-radius: 26px; } /* ===== Buttons ===== */.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 20px; border-radius: 16px; border: 1px solid transparent; font-weight: 700; cursor: pointer; transition: .25s; } .btn-primary { background: linear-gradient(135deg,var(--brand),var(--brand2)); color: #fff; box-shadow: 0 8px 24px rgba(124,58,237,.35); } .btn-primary:hover { transform: translateY(-1px); } .btn-glass { background: rgba(255,255,255,.06); border-color: var(--line); color: var(--text); } /* ===== HERO ===== */.hero { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; } .blob, .blob2 { position: absolute; filter: blur(120px); opacity: .9; pointer-events: none; } .blob { width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; left: -10vw; top: -10vh; background: radial-gradient(circle at 50% 50%, rgba(124,58,237,.45), transparent 60%); } .blob2 { width: 70vw; height: 70vw; max-width: 900px; max-height: 900px; right: -15vw; bottom: -10vh; background: radial-gradient(circle at 50% 50%, rgba(168,85,247,.35), transparent 60%); } /* ===== Sections ===== */section { padding: clamp(36px,8vw,80px) 0; } .grid-4 { display: grid; gap: 16px; } @media (min-width:720px){ .grid-4 {  grid-template-columns: repeat(2,1fr); } } @media (min-width:1024px){ .grid-4 {  grid-template-columns: repeat(4,1fr); } } /* ===== Teachers (mobile swipe) ===== */.cards-teachers { display: grid; gap: 16px; } @media (min-width:900px){ .cards-teachers {  grid-template-columns: repeat(2,1fr);  overflow: visible;  scroll-snap-type: none; } } /* Мобильная карусель через scroll-snap */@media (max-width:899px){ .cards-teachers {  display: flex;  overflow-x: auto;  scroll-snap-type: x mandatory;  gap: 14px;  padding-bottom: 6px; }  .cards-teachers > .card-item {  scroll-snap-align: center;  flex: 0 0 86%; }  .cards-teachers::-webkit-scrollbar {  height: 8px; }  .cards-teachers::-webkit-scrollbar-thumb {  background: rgba(255,255,255,.2);  border-radius: 8px; } } .cards { display: grid; gap: 16px; } @media (min-width:900px){ .cards {  grid-template-columns: repeat(2,1fr); } } /* Вертикальные видео (9:16) под VK */.video-vert { position: relative; aspect-ratio: 9/16; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: #000; } .video-vert iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; } /* Горизонтальные видео (отзывы) */.video { position: relative; aspect-ratio: 16/9; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: #000; } .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; } /* Logos */.logos { display: grid; gap: 12px; grid-template-columns: repeat(2,1fr); } @media (min-width:1024px){ .logos {  grid-template-columns: repeat(6,1fr); } } .logo { min-height: 70px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 16px; color: var(--muted); } /* Contacts */.contacts { display: grid; gap: 12px; } .contact-item { padding: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); border-radius: 16px; } footer { padding: 24px 0; text-align: center; color: var(--muted); border-top: 1px solid var(--line); } /* Modal */.backdrop { position: fixed; inset: 0; background: rgba(4,10,22,.6); display: none; align-items: center; justify-content: center; padding: 18px; z-index: 70; } .modal { width: min(560px,100%); } .row { display: grid; gap: 10px; } label { font-size: 14px; color: var(--muted); } input[type="text"], input[type="tel"], select { width: 100%; border: 1px solid var(--line); background: rgba(255,255,255,.06); color: var(--text); border-radius: 12px; padding: 12px; font-size: 16px; } .modal-actions { display: flex; gap: 10px; margin-top: 12px; } /* Sticky WhatsApp FAB */.fab { position: fixed; right: 16px; bottom: 16px; z-index: 65; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg,#9333ea,#7e22ce); box-shadow: 0 10px 24px rgba(0,0,0,.35); } .fab svg { width: 26px; height: 26px; fill: white; } /* Reveal on scroll */[data-animate] { opacity: 0; transform: translateY(18px); transition: .8s cubic-bezier(.4,0,.2,1); } [data-animate].show { opacity: 1; transform: none; }</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:900,500&display=swap">
+    </head>
+    <body>
+        <!-- NAV -->
+        <nav class="nav">
+            <div class="container nav-inner">
+                <div class="brand" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">Экспертное фитнес‑образование</div>
+                <div class="menu" aria-label="Главное меню"><a href="#program" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">Программа</a><a href="#team" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">Преподаватели</a><a href="#reviews" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">Отзывы</a><a href="#docs" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">Документы</a><a href="#contacts" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">Контакты</a><a class="btn btn-primary" href="https://wa.me/79990000000" target="_blank" rel="noopener" style="font-family: 'Montserrat', sans-serif; font-weight: 900;">WhatsApp</a>
+                </div>
+                <button class="burger" id="burger" aria-label="Открыть меню">Меню ▾</button>
+            </div>
+            <div class="container mobile-panel" id="mobileMenu">
+                <div class="contacts"><a href="#program">Программа</a><a href="#team">Преподаватели</a><a href="#reviews">Отзывы</a><a href="#docs">Документы</a><a href="#contacts">Контакты</a><a class="btn btn-primary" style="width:100%" href="https://wa.me/79990000000" target="_blank" rel="noopener">WhatsApp</a>
+                </div>
+            </div>
+        </nav>
+        <!-- HERO -->
+        <header class="hero">
+            <div class="blob" aria-hidden="true"></div>
+            <div class="blob2" aria-hidden="true"></div>
+            <div class="container" style="position:relative; z-index:1; text-align:center">
+                <div class="glass section-card glass--fx" data-animate>
+                    <h1 style="font-family: 'Montserrat', sans-serif;">Экспертное фитнес‑образование </h1>
+                    <h1 style="font-family: 'Montserrat', sans-serif;">в Барнауле</h1>
+                    <p>Научись управлять телом на уровне клетки — диплом гос. образца</p>
+                    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:8px"><a class="btn btn-primary" href="https://wa.me/79990000000" target="_blank" rel="noopener" style="font-family: 'Montserrat', sans-serif;">Написать в WhatsApp</a>
+                        <button class="btn btn-glass" id="openModal" style="font-family: 'Montserrat', sans-serif;">Скачать программу</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- PROGRAM -->
+        <section id="program">
+            <div class="container">
+                <div class="glass section-card glass--fx">
+                    <h2 data-animate style="font-family: 'Montserrat', sans-serif;">Что внутри программы</h2>
+                    <p class="muted" style="color:var(--muted)" data-animate>Черновые формулировки</p>
+                    <div class="grid-4">
+                        <article class="glass glass--fx" data-animate>
+                            <h3 style="font-size: 17px; text-align: center; font-family: 'Montserrat', sans-serif;">Эндокринология</h3>
+                            <p style="text-align: center;">Работа с лишним весом с медицинским подходом. Связь ЖКТ и общего состояния.</p>
+                        </article>
+                        <article class="glass glass--fx" data-animate>
+                            <h3 style="font-size: 17px; text-align: center; font-family: 'Montserrat', sans-serif;">Нутрициология</h3>
+                            <p style="text-align: center;">Когда ЗОЖ начинает вредить, как получить результат без изнурительных диет.</p>
+                        </article>
+                        <article class="glass glass--fx" data-animate>
+                            <h3 style="text-align: center; font-family: 'Montserrat', sans-serif;">Гипертрофия</h3>
+                            <p style="text-align: center;">Почему «правильная» нагрузка не даёт роста и что мешает прогрессу.</p>
+                        </article>
+                        <article class="glass glass--fx" data-animate>
+                            <h3 style="text-align: center; font-family: 'Montserrat', sans-serif;">Биохимия</h3>
+                            <p style="text-align: center;">Как устроен организм на уровне клетки и что это значит в практике.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TEACHERS (mobile swipe) -->
+        <section id="team">
+            <div class="container">
+                <div class="glass section-card glass--fx">
+                    <h2 data-animate style="font-family: 'Montserrat', sans-serif;">Преподаватели</h2>
+                    <p class="muted" style="color:var(--muted)" data-animate>Короткая видеосамопрезентация каждого</p>
+                    <div class="cards-teachers" id="teachersTrack">
+                        <!-- Каждая карточка: вертикальное видео VK -->
+                        <div class="glass card-item" data-animate>
+                            <div class="video-vert">
+                                <!-- Замените src на ваш vk.com/video_ext.php?...  -->
+                                <iframe src="https://vk.com/video_ext.php?oid=-0000000&id=0000000&hd=2" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3 style="text-align: center; font-family: 'Montserrat', sans-serif;">Имя Фамилия</h3>
+                            <p style="text-align: center;">Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+                        </div>
+                        <div class="glass card-item" data-animate>
+                            <div class="video-vert">
+                                <iframe src="https://vk.com/video_ext.php?oid=-0000000&id=0000001&hd=2" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3 style="text-align: center; font-family: 'Montserrat', sans-serif;">Имя Фамилия</h3>
+                            <p style="text-align: center;">Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+                        </div>
+                        <div class="glass card-item" data-animate>
+                            <div class="video-vert">
+                                <iframe src="https://vk.com/video_ext.php?oid=-0000000&id=0000002&hd=2" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3 style="text-align: center; font-family: 'Montserrat', sans-serif;">Имя Фамилия</h3>
+                            <p style="text-align: center; font-weight: normal;">Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+                        </div>
+                        <div class="glass card-item" data-animate>
+                            <div class="video-vert">
+                                <iframe src="https://vk.com/video_ext.php?oid=-0000000&id=0000003&hd=2" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3 style="text-align: center; font-family: 'Montserrat', sans-serif;">Имя Фамилия</h3>
+                            <p style="text-align: center;">Короткое резюме: 2–3 абзаца — плейсхолдер текст.</p>
+                        </div>
+                    </div>
+                    <!-- стрелки появляются только на мобиле при переполнении -->
+                </div>
+            </div>
+        </section>
+        <!-- REVIEWS -->
+        <section id="reviews">
+            <div class="container">
+                <div class="glass section-card glass--fx">
+                    <h2 data-animate style="font-family: 'Montserrat', sans-serif;">Отзывы и результаты</h2>
+                    <div class="cards" style="margin-bottom:14px">
+                        <div class="glass" data-animate>
+                            <div class="video">
+                                <iframe src="https://www.youtube-nocookie.com/embed/ysz5S6PUM-U?rel=0" title="Отзыв" allowfullscreen loading="lazy"></iframe>
+                            </div>
+                        </div>
+                        <div class="glass" data-animate>
+                            <div class="video">
+                                <iframe src="https://www.youtube-nocookie.com/embed/ysz5S6PUM-U?rel=0" title="Отзыв" allowfullscreen loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="muted" style="color:var(--muted); margin:8px 0 12px" data-animate>Где работают наши выпускники</p>
+                    <div class="logos">
+                        <div class="logo" data-animate>Лого</div>
+                        <div class="logo" data-animate>Лого</div>
+                        <div class="logo" data-animate>Лого</div>
+                        <div class="logo" data-animate>Лого</div>
+                        <div class="logo" data-animate>Лого</div>
+                        <div class="logo" data-animate>Лого</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- DOCS (teaser) -->
+        <section id="docs">
+            <div class="container">
+                <div class="glass section-card glass--fx">
+                    <h2 data-animate style="font-family: 'Montserrat', sans-serif;">Документы</h2>
+                    <p class="muted" style="color:var(--muted)" data-animate>Сканы лицензий, аккредитаций и образцов диплома будут на отдельной странице.</p><a class="btn btn-glass" href="#" aria-disabled="true" data-animate>Перейти на страницу документов</a>
+                </div>
+            </div>
+        </section>
+        <!-- CTA -->
+        <section>
+            <div class="container">
+                <div class="glass section-card glass--fx" data-animate>
+                    <h2 style="font-family: 'Montserrat', sans-serif;">Готовы получить программу обучения?</h2>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px"><a class="btn btn-primary" href="https://wa.me/79990000000" target="_blank" rel="noopener" style="font-family: 'Montserrat', sans-serif;">WhatsApp</a>
+                        <button class="btn btn-glass" id="openModal2" style="font-family: 'Montserrat', sans-serif;">Скачать программу</button><small style="color:var(--muted)">Отправим в выбранный мессенджер</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CONTACTS -->
+        <section id="contacts">
+            <div class="container">
+                <div class="glass section-card glass--fx">
+                    <h2 data-animate style="font-family: 'Montserrat', sans-serif;">Контакты</h2>
+                    <div class="contacts">
+                        <div class="contact-item" data-animate>
+                            <strong>Телефон:</strong> <a href="tel:+79990000000">+7 999 000‑00‑00</a>
+                        </div>
+                        <div class="contact-item" data-animate>
+                            <strong>WhatsApp:</strong> <a href="https://wa.me/79990000000" target="_blank" rel="noopener">написать</a>
+                        </div>
+                        <div class="contact-item" data-animate>
+                            <strong>Telegram:</strong> <a href="https://t.me/username" target="_blank" rel="noopener">@username</a>
+                        </div>
+                        <div class="contact-item" data-animate>
+                            <strong>Email:</strong> <a href="mailto:info@example.com">info@example.com</a>
+                        </div>
+                        <div class="contact-item" data-animate>
+                            <strong>Адрес:</strong> Барнаул, ул. Примерная, 1
+                        </div>
+                        <div class="contact-item" data-animate>
+                            <strong>Карта:</strong> (вставить iframe Яндекс/Google Maps)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="container"><small>© 2025 Экспертное фитнес‑образование · <a href="#">Политика конфиденциальности</a> · <a href="#">Пользовательское соглашение</a></small>
+            </div>
+        </footer>
+        <!-- FAB WA --><a class="fab" href="https://wa.me/79990000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"> <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.52 3.48A11.86 11.86 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.11 1.6 5.9L0 24l6.24-1.64A12.02 12.02 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52ZM12 22a10 10 0 0 1-5.1-1.4l-.37-.22-3.75.98 1-3.65-.24-.38A10 10 0 1 1 22 12c0 5.52-4.48 10-10 10Zm5.5-7.56c-.29-.14-1.73-.85-2-1-.27-.1-.47-.14-.67.14-.2.29-.76 1-.93 1.2-.17.19-.34.22-.63.07-.29-.14-1.22-.45-2.33-1.44-.86-.76-1.44-1.7-1.61-1.98-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.67-1.61-.92-2.21-.24-.57-.48-.5-.67-.5h-.57c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.02 2.82 1.16 3.02c.14.19 2 3.05 4.85 4.28.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.12.55-.08 1.73-.71 1.98-1.38.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33Z"/>
+            </svg></a>
+        <!-- MODAL -->
+        <div class="backdrop" id="modal">
+            <div class="modal glass" role="dialog" aria-modal="true" aria-labelledby="modal-h3">
+                <h3 id="modal-h3">Получить программу</h3>
+                <form id="leadForm">
+                    <div class="row">
+                        <label>ФИО
+                            <input type="text" name="name" required placeholder="Иванов Иван"/>
+                        </label>
+                        <label>Телефон
+                            <input type="tel" name="phone" required placeholder="+7 999 000‑00‑00"/>
+                        </label>
+                        <label>Куда отправить программу
+                            <select name="messenger" required>
+                                <option value="wa">WhatsApp</option>
+                                <option value="tg">Telegram</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                        <button type="button" class="btn btn-glass" id="closeModal">Отмена</button>
+                    </div><small style="color:var(--muted)">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</small>
+                </form>
+            </div>
+        </div>
+        <script>
+  // Burger
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger?.addEventListener('click', ()=>{ mobileMenu.style.display = (mobileMenu.style.display==='block')?'none':'block'; });
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', (e)=>{ const id=a.getAttribute('href'); if(id && id.length>1){e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'}); mobileMenu.style.display='none';}})
+  })
 
-  /* Glass cards */
-  .glass{background:var(--glass-bg); border:1px solid var(--glass-border);
-         backdrop-filter:blur(12px) saturate(160%);
-         -webkit-backdrop-filter:blur(12px) saturate(160%);
-         border-radius:var(--radius); padding:20px;}
+  // Modal
+  const modal = document.getElementById('modal');
+  const open1 = document.getElementById('openModal');
+  const open2 = document.getElementById('openModal2');
+  const closeBtn = document.getElementById('closeModal');
+  [open1,open2].forEach(b=> b?.addEventListener('click', ()=> modal.style.display='flex'));
+  closeBtn?.addEventListener('click', ()=> modal.style.display='none');
+  modal?.addEventListener('click', (e)=>{ if(e.target===modal) modal.style.display='none' });
+  document.getElementById('leadForm')?.addEventListener('submit', (e)=>{ e.preventDefault(); alert('Спасибо! Отправим программу в выбранный мессенджер.'); modal.style.display='none'; })
 
-  /* Buttons */
-  .btn{display:inline-flex; align-items:center; justify-content:center; padding:14px 22px;
-       border-radius:var(--radius); font-weight:600; font-size:16px; cursor:pointer;
-       border:none; text-decoration:none; transition:.25s;}
-  .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff;}
-  .btn-primary:hover{opacity:.9}
-  .btn-glass{background:var(--glass-bg); color:var(--text); border:1px solid var(--glass-border)}
+  // Reveal on scroll
+  const obs = new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('show'); obs.unobserve(en.target);} }); },{threshold:.14});
+  document.querySelectorAll('[data-animate], .logo').forEach(el=> obs.observe(el));
 
-  /* Hero */
-  header.hero{min-height:90vh; display:flex; align-items:center; justify-content:center;
-              text-align:center; position:relative; overflow:hidden;}
-  header.hero::before{content:""; position:absolute; inset:-50%; background:radial-gradient(circle at 50% 30%,rgba(59,130,246,.4),transparent 60%), radial-gradient(circle at 80% 70%,rgba(6,182,212,.35),transparent 60%);
-                      filter:blur(100px);}
-  header.hero .inner{position:relative; z-index:10;}
-
-  /* Sections */
-  section{padding:clamp(40px,8vw,80px) 0;}
-  .grid-4{display:grid; gap:20px;}
-  .grid-4 .glass h3{font-size:18px; margin-bottom:8px}
-
-  @media(min-width:720px){
-    .grid-4{grid-template-columns:repeat(2,1fr)}
-  }
-  @media(min-width:1024px){
-    .grid-4{grid-template-columns:repeat(4,1fr)}
-  }
-
-  /* Teachers */
-  .teachers{display:grid; gap:20px}
-  @media(min-width:900px){.teachers{grid-template-columns:repeat(2,1fr)}}
-  .teacher .video{position:relative; aspect-ratio:16/9; border-radius:var(--radius);
-                  overflow:hidden; margin-bottom:10px;}
-  .teacher .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
-
-  /* Logos */
-  .logos{display:grid; gap:14px; grid-template-columns:repeat(2,1fr)}
-  @media(min-width:1024px){.logos{grid-template-columns:repeat(6,1fr)}}
-  .logo{background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:var(--radius);
-        min-height:70px; display:flex; align-items:center; justify-content:center; color:var(--muted)}
-
-  /* Contacts */
-  .contacts{display:grid; gap:16px}
-  .contact-item{padding:14px; border-radius:var(--radius); background:var(--glass-bg); border:1px solid var(--glass-border)}
-
-  footer{padding:20px 0; text-align:center; font-size:14px; color:var(--muted)}
-
-  /* Simple animations */
-  [data-animate]{opacity:0; transform:translateY(20px); transition:.8s cubic-bezier(.4,0,.2,1)}
-  [data-animate].show{opacity:1; transform:none}
-</style>
-</head>
-<body>
-<header class="hero">
-  <div class="inner container">
-    <h1>Экспертное фитнес‑образование в Барнауле</h1>
-    <p>Научись управлять телом на уровне клетки — диплом гос. образца</p>
-    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <a href="https://wa.me/79990000000" class="btn btn-primary">Написать в WhatsApp</a>
-      <a href="#form" class="btn btn-glass">Скачать программу</a>
-    </div>
-  </div>
-</header>
-
-<section id="program">
-  <div class="container">
-    <h2 data-animate>Что внутри программы</h2>
-    <div class="grid-4">
-      <div class="glass" data-animate><h3>Эндокринология</h3><p>Работа с лишним весом с медицинским подходом.</p></div>
-      <div class="glass" data-animate><h3>Нутрициология</h3><p>Как получить быстрый результат без изнурительных диет.</p></div>
-      <div class="glass" data-animate><h3>Гипертрофия</h3><p>Почему рост мышц останавливается и что с этим делать.</p></div>
-      <div class="glass" data-animate><h3>Биохимия</h3><p>Как работает организм на клеточном уровне.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="teachers">
-  <div class="container">
-    <h2 data-animate>Преподаватели</h2>
-    <div class="teachers">
-      <div class="teacher glass" data-animate>
-        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
-        <h3>Имя Фамилия</h3>
-        <p>Краткое резюме — 2–3 абзаца.</p>
-      </div>
-      <div class="teacher glass" data-animate>
-        <div class="video"><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
-        <h3>Имя Фамилия</h3>
-        <p>Краткое резюме.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="reviews">
-  <div class="container">
-    <h2 data-animate>Отзывы и результаты</h2>
-    <div class="teachers">
-      <div class="video glass" data-animate><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
-      <div class="video glass" data-animate><iframe src="https://www.youtube.com/embed/ysz5S6PUM-U" allowfullscreen></iframe></div>
-    </div>
-    <div class="logos" style="margin-top:30px">
-      <div class="logo" data-animate>Лого</div>
-      <div class="logo" data-animate>Лого</div>
-      <div class="logo" data-animate>Лого</div>
-      <div class="logo" data-animate>Лого</div>
-    </div>
-  </div>
-</section>
-
-<section id="contacts">
-  <div class="container">
-    <h2 data-animate>Контакты</h2>
-    <div class="contacts">
-      <div class="contact-item" data-animate><strong>Телефон:</strong> +7 999 000‑00‑00</div>
-      <div class="contact-item" data-animate><strong>WhatsApp:</strong> ссылка</div>
-      <div class="contact-item" data-animate><strong>Telegram:</strong> ссылка</div>
-      <div class="contact-item" data-animate><strong>Email:</strong> info@example.com</div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">© 2025 Экспертное фитнес‑образование</div>
-</footer>
-
-<script>
-  const els = document.querySelectorAll('[data-animate]');
-  const obs = new IntersectionObserver(entries =>{
-    entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('show')})
-  },{threshold:.1});
-  els.forEach(el=>obs.observe(el));
+  // Parallax blobs
+  const blob = document.querySelector('.blob');
+  const blob2 = document.querySelector('.blob2');
+  const parallax = () => { const y = window.scrollY||window.pageYOffset; blob.style.transform=`translateY(${y*0.1}px)`; blob2.style.transform=`translateY(${y*-0.06}px)`; };
+  parallax(); window.addEventListener('scroll', parallax, {passive:true});
 </script>
-</body>
+    </body>
 </html>
